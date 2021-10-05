@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use auth;
 use App\Models\Question;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreQuestionRequest;
 
-class QuizController extends Controller
+class QuestionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +16,10 @@ class QuizController extends Controller
      */
     public function index()
     {
-        //
+        $questions = Question::where('user_id', auth()->id())->get();
+
+        return view('questions.index', compact('questions'));
+
     }
 
     /**
@@ -23,11 +28,8 @@ class QuizController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {   
-        $questions = Question::where('user_id', auth()->id())->get();
-
-
-        return view('quizzes.create', compact('questions'));
+    {
+        return view('questions.create');
     }
 
     /**
@@ -36,9 +38,14 @@ class QuizController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreQuestionRequest $request)
     {
-        //
+        
+        $question = Question::create($request->validated() + ['user_id' => auth()->id()]);
+        
+        return redirect()->route('questions.index');
+
+        
     }
 
     /**
