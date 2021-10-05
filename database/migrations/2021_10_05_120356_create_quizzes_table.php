@@ -15,7 +15,7 @@ class CreateQuizzesTable extends Migration
     {
         Schema::create('quizzes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('users')->constrained();
+            $table->foreignId('user_id')->constrained();
             $table->string('title');
             $table->string('password');
             $table->text('description');
