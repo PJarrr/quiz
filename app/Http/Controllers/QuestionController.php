@@ -65,9 +65,13 @@ class QuestionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Question $question)
     {
-        //
+          if($question->user_id != auth()->id()){
+            abort(403);
+        }; 
+
+        return view('questions.edit', compact('question'));
     }
 
     /**
@@ -77,9 +81,15 @@ class QuestionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreQuestionRequest $request, Question $question)
     {
-        //
+        if($question->user_id != auth()->id()){
+            abort(403);
+        };
+
+        $question->update($request->validated());
+
+        return redirect()->route('questions.index');
     }
 
     /**
@@ -88,8 +98,14 @@ class QuestionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Question $question)
     {
-        //
+        if($question->user_id != auth()->id()){
+            abort(403);
+        };
+
+        $question->delete();
+
+        return redirect()->route('questions.index');
     }
 }

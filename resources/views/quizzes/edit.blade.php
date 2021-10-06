@@ -1,22 +1,22 @@
 @extends('layouts.app')
-
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Create New Quiz') }}</div>
+                <div class="card-header">{{ __('Edit Quiz') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('quizzes.store') }}">
+                    <form method="POST" action="{{ route('quizzes.update', $quiz) }}">
                         @csrf
+                        @method('PUT')
 
                         <div class="form-group row">
                             <label for="title" class="col-md-4 col-form-label text-md-right">{{ __('Title') }}</label>
 
                             <div class="col-md-6">
                                 <input id="title" type="text" class="form-control @error('title') is-invalid @enderror"
-                                    name="title" value="{{ old('title') }}" required autocomplete="title" autofocus>
+                                    name="title" value="{{ $quiz->title }}" required autocomplete="title" autofocus>
 
                                 @error('title')
                                 <span class="invalid-feedback" role="alert">
@@ -30,9 +30,9 @@
                             <label for="description"
                                 class="col-md-4 col-form-label text-md-right">{{ __('description') }}</label>
                             <div class="col-md-6">
-                                <textarea name="description" value="{{ old('description') }}"
+                                <textarea name="description" value=""
                                     class="form-control @error('description') is-invalid @enderror" id=""
-                                    required></textarea>
+                                    required>{{ $quiz->description }}</textarea>
                                 @error('description')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -63,10 +63,12 @@
                                 class="col-md-4 col-form-label text-md-right">{{ __('Questions') }}</label>
 
                             <div class="col-md-6">
-                                <select name="questions[]" value="{{ old('questions[]') }}" class="form-control select2"
-                                    multiple id="">
+                                <select name="questions[]" class="form-control select2" multiple id="">
                                     @foreach ($questions as $question )
-                                    <option value="{{$question->id}}">{{$question->question_text}}</option>
+
+                                    <option value="{{$question->id}}" @if($quiz->
+                                        questions->contains($question->id))
+                                        selected @endif>{{$question->question_text}}</option>
                                     @endforeach
                                 </select>
                             </div>

@@ -65,9 +65,15 @@ class QuizController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        //
+    public function edit(Quiz $quiz)
+    {   
+        if($quiz->user_id != auth()->id()){
+        abort(403);
+        };
+
+        $questions = Question::where('user_id', auth()->id())->get();
+        // $quiz->load('questions');
+        return view('quizzes.edit', compact('quiz', 'questions'));
     }
 
     /**
@@ -77,9 +83,16 @@ class QuizController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreQuizRequest $request, Quiz $quiz)
     {
-        //
+        if($quiz->user_id != auth()->id()){
+        abort(403);
+        };
+
+        $quiz->update($request->validated());
+        $quiz->questions()->sync($request->questions);
+        
+        return redirect()->route('quizzes.index');
     }
 
     /**
@@ -88,8 +101,14 @@ class QuizController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Quiz $quiz)
     {
-        //
+        if($quiz->user_id != auth()->id()){
+        abort(403);
+        };
+
+        $quiz->delete();
+
+        return redirect()->route('quizzes.index');
     }
 }
