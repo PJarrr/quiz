@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="card-header">{{ __('Play Quiz') }}</div>
                 <div class="card-body">
-                    <form method="POST" action="{{route('play.game')}}">
+                    <form method="POST" action="{{route('game.lobby')}}">
                         @csrf
 
                         <div class="form-group row">
@@ -26,7 +26,7 @@
                                 @enderror
                             </div>
                             <button type="submit" class="btn btn-primary">
-                                {{ __('Play') }}
+                                {{ __('Enter') }}
                             </button>
                         </div>
                     </form>
