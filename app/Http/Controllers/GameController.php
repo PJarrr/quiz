@@ -21,8 +21,6 @@ class GameController extends Controller
         return view('game.start');
     }
 
-
-
     public function lobby(Request $request)
     {   
         $quiz_id = Quiz::where('title', $request->quiz_title)->value('id');
@@ -34,14 +32,23 @@ class GameController extends Controller
 
     public function play(Quiz $quiz)
     {   
- 
+        $all_questions = $quiz->questions()->get();
 
+        $answers = $quiz->answers()->get();
+        // $answered_questions = $quiz->answers()->where('user_id', auth()->id())->pluck('question_id');
+        
+        foreach ($all_questions as $question)
+        {
+            if ($question->)
 
+        }
+
+        
+        
+        
+        //dd($answers);
+    
         $question = $quiz->questions()->first();
-
-
-
-
 
         //Data to view:
         $question_id = $question->id;
@@ -64,7 +71,7 @@ class GameController extends Controller
             'quiz_id'=> $quiz->id,
             'question_id'=>$request->question_id,
             'answer'=>$request->answer]);
-            
+
         return redirect()->route('game.play', compact('quiz'));
     }
 
