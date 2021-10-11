@@ -32,23 +32,23 @@ class GameController extends Controller
 
     public function play(Quiz $quiz)
     {   
-        $all_questions = $quiz->questions()->get();
 
-        $answers = $quiz->answers()->get();
-        // $answered_questions = $quiz->answers()->where('user_id', auth()->id())->pluck('question_id');
+        // Getting not answered questions
+        $allQuestions = $quiz->questions()->get();
+        $allQuizAnswers = $quiz->answers()->get();
+        $answeredQuestions = collect([]);
         
-        foreach ($all_questions as $question)
+        foreach ($allQuizAnswers as $answer)
         {
-            if ($question->)
-
+            
+            if($answer->user_id === auth()->id()){
+                $answeredQuestion = $answer->question()->first();
+                $answeredQuestions->push($answeredQuestion);
+            }
         }
-
+        $unansweredQuestions = $allQuestions->diff($answeredQuestions);
         
-        
-        
-        //dd($answers);
-    
-        $question = $quiz->questions()->first();
+        $question = $unansweredQuestions->first();
 
         //Data to view:
         $question_id = $question->id;
@@ -71,6 +71,12 @@ class GameController extends Controller
             'quiz_id'=> $quiz->id,
             'question_id'=>$request->question_id,
             'answer'=>$request->answer]);
+            
+
+            $quiz->answers()->attach(1, [
+            'user_id' => auth()->id(),
+            'quiz_id'=> $quiz->id,
+            'answer_id'=>$answer->id] );
 
         return redirect()->route('game.play', compact('quiz'));
     }
