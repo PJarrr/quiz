@@ -29,5 +29,38 @@ class DatabaseSeeder extends Seeder
            
         ]);
 
+         DB::table('questions')->insert([
+            
+            'user_id' => 1,
+            'question_text'=>'Kas?', 
+            'correct_answer'=>'1',
+            'incorrect_answer1'=>'2',
+            'incorrect_answer2'=>'3',
+            'incorrect_answer3'=>'4',
+            
+        ]);
+         DB::table('questions')->insert([
+            
+            'user_id' => 1,
+            'question_text'=>'Kodel?', 
+            'correct_answer'=>'1',
+            'incorrect_answer1'=>'2',
+            'incorrect_answer2'=>'3',
+            'incorrect_answer3'=>'4',
+            
+        ]);
+         DB::table('questions')->insert([
+            
+            'user_id' => 1,
+            'question_text'=>'Kaip?', 
+            'correct_answer'=>'1',
+            'incorrect_answer1'=>'2',
+            'incorrect_answer2'=>'3',
+            'incorrect_answer3'=>'4',
+            
+        ]);
+
+
+
     }
 }
