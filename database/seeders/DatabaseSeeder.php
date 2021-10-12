@@ -33,7 +33,7 @@ class DatabaseSeeder extends Seeder
             
             'user_id' => 1,
             'question_text'=>'Kas?', 
-            'correct_answer'=>'1',
+            'correct_answer'=>'correct1',
             'incorrect_answer1'=>'2',
             'incorrect_answer2'=>'3',
             'incorrect_answer3'=>'4',
@@ -43,7 +43,7 @@ class DatabaseSeeder extends Seeder
             
             'user_id' => 1,
             'question_text'=>'Kodel?', 
-            'correct_answer'=>'1',
+            'correct_answer'=>'correct2',
             'incorrect_answer1'=>'2',
             'incorrect_answer2'=>'3',
             'incorrect_answer3'=>'4',
@@ -53,7 +53,7 @@ class DatabaseSeeder extends Seeder
             
             'user_id' => 1,
             'question_text'=>'Kaip?', 
-            'correct_answer'=>'1',
+            'correct_answer'=>'correct3',
             'incorrect_answer1'=>'2',
             'incorrect_answer2'=>'3',
             'incorrect_answer3'=>'4',

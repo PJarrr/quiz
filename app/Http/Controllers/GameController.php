@@ -43,15 +43,11 @@ class GameController extends Controller
 
     public function play(Game $game)
     {   
-       
-        
-
+    
         // Getting not answered questions
         $allQuestions = $game->quiz->questions()->get();
         $allGameAnswers = $game->answers()->get();
-       
-       //dd($allQuestions);
-       //dd($allGameAnswers);
+
         $answeredQuestions = collect([]);
 
         foreach ($allGameAnswers as $answer)
@@ -62,24 +58,31 @@ class GameController extends Controller
         }
         $unansweredQuestions = $allQuestions->diff($answeredQuestions);
         
-        $question = $unansweredQuestions->first();
+        if ($unansweredQuestions->count()) //sending not answered question to view for answering
+        {
+            $question = $unansweredQuestions->first();
+            $question_id = $question->id;
+            $question_text = $question->question_text;
+            $options = [
+                $question->correct_answer,
+                $question->incorrect_answer1,
+                $question->incorrect_answer2,
+                $question->incorrect_answer3,
+            ];
+            shuffle($options);
+    
+            return view('game.play', compact('game','question_id', 'question_text', 'options'));
+            
+        } else { //if no unanswered questions left - show results
 
-        //Data to view:
-
-        //$question = $game->quiz->questions()->first();
-       
-        $question_id = $question->id;
-        $question_text = $question->question_text;
-        $options = [
-            $question->correct_answer,
-            $question->incorrect_answer1,
-            $question->incorrect_answer2,
-            $question->incorrect_answer3,
-        ];
-        shuffle($options);
-
-        return view('game.play', compact('game','question_id', 'question_text', 'options'));
+           $this->calculateGameResult($game);
+        }
         
+
+        
+
+
+       
     }
     public function submitAnswer(StoreAnswerRequest $request, Game $game)  
     {
@@ -119,7 +122,24 @@ class GameController extends Controller
         
     }
 
+    public function calculateGameResult($game)
+    {
+        $totalQuestionsCount = $game->quiz->questions->count();
+        $allAnswers = $allGameAnswers = $game->answers()->get();
+        $correctAnswers= 0;
 
- 
+        foreach ($allAnswers as $answer){
+            if( $answer->answer === $answer->question()->first()->correct_answer)
+            {
+                $correctAnswers++;
+            }
+        }
+        
+    }
+
+   
+
+    
+
 
 }
