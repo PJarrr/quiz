@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="card-header">{{ __('Please answer the question') }}</div>
                 <div class="card-body">
-                    <form class="d-flex flex-column" method="post" action="{{route('game.submitAnswer', $quiz)}}">
+                    <form class="d-flex flex-column" method="post" action="{{route('game.submitAnswer', $game)}}">
                         @method('POST')
                         id:{{$question_id}}
                         Question:{{$question_text}}

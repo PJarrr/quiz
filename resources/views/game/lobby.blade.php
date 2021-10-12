@@ -7,10 +7,10 @@
             <div class="card">
                 <div class="card-header">{{ __('Play Quiz') }}</div>
                 <div class="card-body">
-                    Welcome to quiz {{$quiz->title}}!!! <br>
-                    Number of questions: {{$quiz->questions->count()}} <br>
+                    Welcome to quiz {{$game->quiz->title}}!!! <br>
+                    Number of questions: {{$game->quiz->questions->count()}} <br>
                     Time: X
-                    <a class="btn btn-primary" href="{{route('game.play', $quiz)}}">Play Quiz</a>
+                    <a class="btn btn-primary" href="{{route('game.play', $game)}}">Play Quiz</a>
 
 
 

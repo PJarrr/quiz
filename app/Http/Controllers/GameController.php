@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
+use App\Models\Game;
 use App\Models\Quiz;
 use App\Models\User;
 use App\Models\Answer;
@@ -23,34 +24,50 @@ class GameController extends Controller
 
     public function lobby(Request $request)
     {   
-        $quiz_id = Quiz::where('title', $request->quiz_title)->value('id');
-        $quiz = Quiz::where('title', $request->quiz_title)->first();
+        //check if user plays this quiz for the first time
+        $quiz= Quiz::where('title', $request->quiz_title)->first();
         
-        return view('game.lobby', compact('quiz'));
+        $game = Game::where('user_id', auth()->id())->where('quiz_id', $quiz->id)->get();
+
+        if (!$game->count())
+        {
+            $this->store($quiz);
+        }
+        $game = Game::where('user_id', auth()->id())->where('quiz_id', $quiz->id)->first();
+
+        //dd($game->quiz);
+
+        return view('game.lobby', compact('game'));
     }
 
 
-    public function play(Quiz $quiz)
+    public function play(Game $game)
     {   
+       
+        
 
         // Getting not answered questions
-        $allQuestions = $quiz->questions()->get();
-        $allQuizAnswers = $quiz->answers()->get();
+        $allQuestions = $game->quiz->questions()->get();
+        $allGameAnswers = $game->answers()->get();
+       
+       //dd($allQuestions);
+       //dd($allGameAnswers);
         $answeredQuestions = collect([]);
-        
-        foreach ($allQuizAnswers as $answer)
+
+        foreach ($allGameAnswers as $answer)
         {
-            
-            if($answer->user_id === auth()->id()){
                 $answeredQuestion = $answer->question()->first();
+
                 $answeredQuestions->push($answeredQuestion);
-            }
         }
         $unansweredQuestions = $allQuestions->diff($answeredQuestions);
         
         $question = $unansweredQuestions->first();
 
         //Data to view:
+
+        //$question = $game->quiz->questions()->first();
+       
         $question_id = $question->id;
         $question_text = $question->question_text;
         $options = [
@@ -61,31 +78,33 @@ class GameController extends Controller
         ];
         shuffle($options);
 
-        return view('game.play', compact('quiz','question_id', 'question_text', 'options'));
+        return view('game.play', compact('game','question_id', 'question_text', 'options'));
         
     }
-    public function submitAnswer(StoreAnswerRequest $request, Quiz $quiz)  
+    public function submitAnswer(StoreAnswerRequest $request, Game $game)  
     {
+       
+        
         $answer = Answer::create([
             'user_id' => auth()->id(),
-            'quiz_id'=> $quiz->id,
+            'game_id'=> $game->id,
             'question_id'=>$request->question_id,
             'answer'=>$request->answer]);
             
 
-            $quiz->answers()->attach(1, [
+
+            $game->answers()->attach(1, [
             'user_id' => auth()->id(),
-            'quiz_id'=> $quiz->id,
+            'game_id'=> $game->id,
             'answer_id'=>$answer->id] );
 
-        return redirect()->route('game.play', compact('quiz'));
+        return redirect()->route('game.play', compact('game'));
     }
 
 
-    public function startedQuiz($quiz_id)  
+    public function store($quiz)  
     {
-
-        $quiz = StartedQuiz::create(['user_id' => auth()->id(), 'quiz_id'=>$quiz_id ]); 
+        $game = Game::create(['user_id' => auth()->id(), 'quiz_id'=>$quiz->id ]); 
     }
 
     
@@ -99,5 +118,8 @@ class GameController extends Controller
     {   
         
     }
+
+
+ 
 
 }

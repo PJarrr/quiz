@@ -60,7 +60,29 @@ class DatabaseSeeder extends Seeder
             
         ]);
 
+         DB::table('quizzes')->insert([
+            'user_id' => 1,
+            'title' => 'quiz1',
+            'password'=>'123',
+            'description' =>'test quiz'
+        ]);
+
+         DB::table('question_quiz')->insert([
+            'quiz_id' => 1,
+            'question_id' => 1,
+        ]);
+         DB::table('question_quiz')->insert([
+            'quiz_id' => 1,
+            'question_id' => 2,
+        ]);
+         DB::table('question_quiz')->insert([
+            'quiz_id' => 1,
+            'question_id' => 3,
+        ]);
+
+        
 
 
+    
     }
 }

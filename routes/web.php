@@ -32,8 +32,8 @@ Route::group(['middleware' => 'auth'], function() {
 Route::group(['prefix' => 'game', 'middleware' => ['auth']], function(){
     Route::get('', [GameController::class, 'start'])->name('game.start');
     Route::post('lobby', [GameController::class, 'lobby'])->name('game.lobby');
-    Route::get('play/{quiz}', [GameController::class, 'play'])->name('game.play');
-    Route::post('submit-answer/{quiz}', [GameController::class, 'submitAnswer'])->name('game.submitAnswer');
+    Route::get('play/{game}', [GameController::class, 'play'])->name('game.play');
+    Route::post('submit-answer/{game}', [GameController::class, 'submitAnswer'])->name('game.submitAnswer');
     //Route::post('game', [PlayController::class, 'game'])->name('play.game');
     //Route::post('submit-answer', [PlayController::class, 'submitAnswer'])->name('play.submitAnswer');
     // Route::get('results', [GameController::class, 'quizResults'])->name('quiz.results');
