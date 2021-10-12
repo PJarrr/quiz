@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Quiz;
+use App\Models\User;
 use App\Models\Question;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreQuizRequest;
@@ -28,7 +29,7 @@ class QuizController extends Controller
      */
     public function create()
     {   
-        $questions = Question::where('user_id', auth()->id())->get();
+        $questions = User::find(auth()->id())->questions()->get();
 
 
         return view('quizzes.create', compact('questions'));
