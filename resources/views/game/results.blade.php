@@ -1,11 +1,9 @@
 @php
-$quiz = $result->game->first()->quiz->first();
-$answers = $result->game->first()->answers;
+$quiz = $game->quiz;
+$questions = $quiz->questions;
+$answers = $game->answers;
 @endphp
 @extends('layouts.app')
-
-
-
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -16,9 +14,6 @@ $answers = $result->game->first()->answers;
                 </div>
                 <div class="card-body">
                     <h3> Correct Answers: {{$result->correct_answers}}</h3>
-
-
-
                     @foreach ($quiz->questions as $question)
                     <div class="card" style="width: 100%;">
                         <div class="card-header">
@@ -29,25 +24,28 @@ $answers = $result->game->first()->answers;
                                     $answer) @if ($answer->question_id === $question->id && $answer->answer ===
                                 $question->correct_answer ) checked
                                 @endif
+                                @endforeach type="radio">{{$question->correct_answer}}</li>
 
+                            <li class="list-group-item"><input @foreach ($answers as $answer) @if ($answer->question_id
+                                === $question->id && $answer->answer ===
+                                $question->incorrect_answer1 ) checked
+                                @endif
+                                @endforeach type="radio">{{$question->incorrect_answer1}}</li>
 
-                                @endforeach
+                            <li class="list-group-item"><input @foreach ($answers as $answer) @if ($answer->question_id
+                                === $question->id && $answer->answer ===
+                                $question->incorrect_answer2 ) checked
+                                @endif
+                                @endforeach type="radio">{{$question->incorrect_answer2}}</li>
 
-
-
-                                type="radio">{{$question->correct_answer}}</li>
-
-                            <li class="list-group-item"><input type="radio">{{$question->incorrect_answer1}}</li>
-
-                            <li class="list-group-item"><input type="radio">{{$question->incorrect_answer2}}</li>
-
-                            <li class="list-group-item"><input type="radio">{{$question->incorrect_answer3}}</li>
+                            <li class="list-group-item"><input @foreach ($answers as $answer) @if ($answer->question_id
+                                === $question->id && $answer->answer ===
+                                $question->incorrect_answer3 ) checked
+                                @endif
+                                @endforeach type="radio">{{$question->incorrect_answer3}}</li>
                         </ul>
                     </div>
                     <hr>
-
-
-
                     @endforeach
 
 

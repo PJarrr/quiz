@@ -9,27 +9,6 @@ use App\Models\Result;
 class GameResultController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-     
-
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -37,9 +16,7 @@ class GameResultController extends Controller
      */
     public function store(Game $game)
     {
-
-    
-        //chec if it is first time when submiting result for this game
+        //check if it is first time when submiting result for this game
         if (!Result::all()->contains($game->result()->first()))
         {
             $totalQuestionsCount = $game->quiz->questions->count();
@@ -56,10 +33,8 @@ class GameResultController extends Controller
             $result=Result::create(['game_id'=>$game->id, 'correct_answers'=>$correctAnswers]);
         }
 
-        
         $result = $game->result()->first();
-        
-        
+
         return redirect()->route('game.results.show', compact('game', 'result'));
     }
 
@@ -71,43 +46,19 @@ class GameResultController extends Controller
      */
     public function show(Game $game, Result $result)
 
-    {
-
+    {  
+        //Quiz creator can view detailed results of all participants.
+        //User (participant) can view only his own result of the quiz.
+    
+        if (auth()->id() === $game->user_id || auth()->id() === $game->quiz->user_id)
+        {
+            return view('game.results', compact('game','result'));
+        }else
+        {
+            abort(404); 
+        }
         
-        return view('game.results', compact('result'));
+        
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

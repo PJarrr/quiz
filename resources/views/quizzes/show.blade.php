@@ -5,27 +5,28 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Quiz Results') }}</div>
+                <div class="card-header">{{ __('Quiz details') }}</div>
                 <div class="card-body">
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>Quiz title</th>
-                                <th>Quiz author</th>
-                                <th>Your Result</th>
+                                <th>Participant</th>
+                                <th>Date</th>
+                                <th>Result</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($results as $result )
+                            @foreach ($quiz->games as $game )
                             <tr>
                                 <td>
-                                    <a href="{{route('game.results.show', [$result->game, $result] )}}">{{$result->game->quiz->title}}<a>
+                                    <a
+                                        href="{{route('game.results.show', [$game, $game->result])}}">{{$game->user->name}}</a>
                                 </td>
                                 <td>
-                                    {{$result->game->quiz->user->name}}
+                                    {{$game->result->created_at}}
                                 </td>
                                 <td>
-                                    {{round(($result->correct_answers / $result->game->quiz->questions->count())*100, 2)               }}
+                                    {{round(($game->result->correct_answers / $game->quiz->questions->count())*100, 2)}}
                                     %
                                 </td>
                             </tr>

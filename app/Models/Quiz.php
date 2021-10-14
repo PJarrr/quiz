@@ -29,4 +29,10 @@ class Quiz extends Model
     {
         return $this->belongsToMany(Answer::class);
     }
+
+
+    public function games()
+    {
+        return $this->hasMany(Game::class);
+    }
 }

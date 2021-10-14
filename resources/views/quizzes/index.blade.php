@@ -19,6 +19,10 @@
 
                         <tbody>
                             @foreach ($quizzes as $quiz )
+                            {{$quiz->games}}
+
+
+
                             <tr>
                                 <td>
                                     <a href="{{route('quizzes.show', $quiz)}}">{{$quiz->title}}</a>
@@ -41,6 +45,8 @@
                             @endforeach
                         </tbody>
                     </table>
+
+
                 </div>
             </div>
         </div>
