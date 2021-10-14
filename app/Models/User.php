@@ -55,4 +55,11 @@ class User extends Authenticatable
     {
         return $this->hasMany(StartedQuiz::class);
     }
+    public function results()
+    {
+        return $this->hasManyThrough(Result::class, Game::class);
+    }
+
+
+    
 }

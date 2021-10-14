@@ -23,4 +23,9 @@ class Game extends Model
     {
         return $this->belongsToMany(Answer::class);
     }
+
+    public function result()
+    {
+        return $this->hasOne(Result::class);
+    }
 }
