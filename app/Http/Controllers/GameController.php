@@ -27,24 +27,16 @@ class GameController extends Controller
     {   
         //check if user plays this quiz for the first time
         $quiz= Quiz::where('title', $request->quiz_title)->first();
-        
-        $game = Game::where('user_id', auth()->id())->where('quiz_id', $quiz->id)->get();
 
-        if (!$game->count())
-        {
-            $this->store($quiz);
-        }
         $game = Game::where('user_id', auth()->id())->where('quiz_id', $quiz->id)->first();
-
-        //dd($game->quiz);
-
-        return view('game.lobby', compact('game'));
+        
+        return view('game.lobby', compact('quiz', 'game'));
     }
 
 
     public function play(Game $game)
     {   
-    
+       
         // Getting not answered questions
         $allQuestions = $game->quiz->questions()->get();
         $allGameAnswers = $game->answers()->get();
@@ -106,9 +98,20 @@ class GameController extends Controller
     }
 
 
-    public function store($quiz)  
+    public function store(Request $request)  
     {
-        $game = Game::create(['user_id' => auth()->id(), 'quiz_id'=>$quiz->id ]); 
+        $quiz_id = $request->quiz_id;
+
+        $game = Game::where('user_id', auth()->id())->where('quiz_id', $quiz_id)->get();
+
+        if (!$game->count())
+        {
+            $game = Game::create(['user_id' => auth()->id(), 'quiz_id'=>$quiz_id ]); 
+        }
+
+        $game = Game::where('user_id', auth()->id())->where('quiz_id', $quiz_id)->first();
+
+        return redirect()->route('game.play', compact('game'));
     }
 
     
