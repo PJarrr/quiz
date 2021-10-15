@@ -36,6 +36,7 @@ Route::group(['middleware' => 'auth'], function() {
 Route::group([ 'middleware' => ['auth']], function(){
     Route::get('game/', [GameController::class, 'start'])->name('game.start');
     Route::post('game/lobby', [GameController::class, 'lobby'])->name('game.lobby');
+    Route::post('game/store', [GameController::class, 'store'])->name('game.store');
     Route::get('game/play/{game}', [GameController::class, 'play'])->name('game.play');
     Route::post('game/submit-answer/{game}', [GameController::class, 'submitAnswer'])->name('game.submitAnswer');
     
