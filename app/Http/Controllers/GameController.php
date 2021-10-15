@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests\StoreAnswerRequest;
 use App\Http\Controllers\GameController;
 
+
 class GameController extends Controller
 {
     public function start()
@@ -29,8 +30,14 @@ class GameController extends Controller
         $quiz= Quiz::where('title', $request->quiz_title)->first();
 
         $game = Game::where('user_id', auth()->id())->where('quiz_id', $quiz->id)->first();
-        
-        return view('game.lobby', compact('quiz', 'game'));
+
+        $finishTime = '';
+        if($game){  
+            $finishTime=$game->created_at->add($quiz->time, 'minute');
+        }
+        Session::put('finishTime',$finishTime );
+
+        return view('game.lobby', compact('quiz', 'game', 'finishTime'));
     }
 
 
@@ -40,6 +47,11 @@ class GameController extends Controller
         // Getting not answered questions
         $allQuestions = $game->quiz->questions()->get();
         $allGameAnswers = $game->answers()->get();
+
+
+        $finishTime=$game->created_at->add($game->quiz->time, 'minute');
+        
+        Session::put('finishTime',$finishTime );
 
         $answeredQuestions = collect([]);
 
@@ -126,22 +138,11 @@ class GameController extends Controller
         
     }
 
-    // public function calculateGameResult($game)
-    // {
-    //     $totalQuestionsCount = $game->quiz->questions->count();
-    //     $allAnswers = $allGameAnswers = $game->answers()->get();
-    //     $correctAnswers= 0;
-
-    //     foreach ($allAnswers as $answer){
-    //         if( $answer->answer === $answer->question()->first()->correct_answer)
-    //         {
-    //             $correctAnswers++;
-    //         }
-    //     }
-
-    //     return redirect()->route('game.results.store', compact('game'));
-        
-    // }
+    public function time()
+    {
+        $finishTime = new Carbon(Session::get('finishTime'));
+        return $finishTime;
+    }
 
 
 }

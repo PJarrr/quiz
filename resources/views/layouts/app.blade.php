@@ -11,7 +11,11 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
+    <script>
+        const timeURL = "{{route('game.time')}}";
+    </script>
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/deadline-counter.js') }}"></script>
 
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
@@ -60,8 +64,8 @@
                         @else
 
                         <li class="nav-item">
-                            <a class="nav-link" style="color: black;"
-                                href="{{ route('game.start') }}">{{ __('Start Quiz') }}</a>
+                            <a class="nav-link" style="color: black;" href="{{ route('game.start') }}">{{ __('Start
+                                Quiz') }}</a>
                         </li>
 
                         <li class="nav-item dropdown">

@@ -10,10 +10,15 @@
                     Welcome to quiz {{$quiz->title}}!!! <br>
                     Number of questions: {{$quiz->questions->count()}} <br>
                     @if($game)
-                    Number of answered questions: {{$game->answers->count()}}
+                    You already started this quiz.
+                    Number of answered questions: {{$game->answers->count()}} <br>
+                    Deadline time: {{$finishTime}} <br>
                     @endif
-                    Time: X
-                    <form method="POST" action="{{route('game.store')}}">
+
+                    @if (!$game)
+                    Time: {{$quiz->time}} minutes
+                    @endif
+                    <form method="POST" class="time" action="{{route('game.store')}}">
                         @csrf
                         <input type="hidden" name="quiz_id" value="{{$quiz->id}}">
                         <div class="form-group row">
@@ -33,4 +38,6 @@
         </div>
     </div>
 </div>
+
+
 @endsection

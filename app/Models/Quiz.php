@@ -11,7 +11,7 @@ class Quiz extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = ['user_id', 'title', 'password', 'description']; 
+    protected $fillable = ['user_id', 'title', 'password', 'description', 'time']; 
 
 
     public function questions()

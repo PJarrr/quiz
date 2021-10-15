@@ -49,3 +49,7 @@ Route::group([ 'middleware' => ['auth']], function(){
 Route::group([ 'middleware' => ['auth']], function(){
     Route::resource('results', ResultController::class);
 });
+
+
+   //AXIOS
+    Route::get('time', [GameController::class, 'time'])->name('game.time');
