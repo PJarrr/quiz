@@ -16,7 +16,6 @@
                                 <th>Actions</th>
                             </tr>
                         </thead>
-
                         <tbody>
                             @foreach ($quizzes as $quiz )
                             <tr>
@@ -41,6 +40,8 @@
                             @endforeach
                         </tbody>
                     </table>
+
+
                 </div>
             </div>
         </div>

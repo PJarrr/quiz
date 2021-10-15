@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests\StoreAnswerRequest;
+use App\Http\Controllers\GameController;
 
 class GameController extends Controller
 {
@@ -75,7 +76,7 @@ class GameController extends Controller
             
         } else { //if no unanswered questions left - show results
 
-           $this->calculateGameResult($game);
+           return redirect()->route('store-result', compact('game'));
         }
         
 
@@ -122,24 +123,22 @@ class GameController extends Controller
         
     }
 
-    public function calculateGameResult($game)
-    {
-        $totalQuestionsCount = $game->quiz->questions->count();
-        $allAnswers = $allGameAnswers = $game->answers()->get();
-        $correctAnswers= 0;
+    // public function calculateGameResult($game)
+    // {
+    //     $totalQuestionsCount = $game->quiz->questions->count();
+    //     $allAnswers = $allGameAnswers = $game->answers()->get();
+    //     $correctAnswers= 0;
 
-        foreach ($allAnswers as $answer){
-            if( $answer->answer === $answer->question()->first()->correct_answer)
-            {
-                $correctAnswers++;
-            }
-        }
+    //     foreach ($allAnswers as $answer){
+    //         if( $answer->answer === $answer->question()->first()->correct_answer)
+    //         {
+    //             $correctAnswers++;
+    //         }
+    //     }
+
+    //     return redirect()->route('game.results.store', compact('game'));
         
-    }
-
-   
-
-    
+    // }
 
 
 }
