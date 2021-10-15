@@ -7,13 +7,27 @@
             <div class="card">
                 <div class="card-header">{{ __('Play Quiz') }}</div>
                 <div class="card-body">
-                    Welcome to quiz {{$game->quiz->title}}!!! <br>
-                    Number of questions: {{$game->quiz->questions->count()}} <br>
+                    Welcome to quiz {{$quiz->title}}!!! <br>
+                    Number of questions: {{$quiz->questions->count()}} <br>
+                    @if($game)
+                    Number of answered questions: {{$game->answers->count()}}
+                    @endif
                     Time: X
-                    <a class="btn btn-primary" href="{{route('game.play', $game)}}">Play Quiz</a>
-
-
-
+                    <form method="POST" action="{{route('game.store')}}">
+                        @csrf
+                        <input type="hidden" name="quiz_id" value="{{$quiz->id}}">
+                        <div class="form-group row">
+                            <button type="submit" class="btn btn-primary">
+                                @if ($game && ($quiz->questions->count() === $game->answers->count()) )
+                                {{ __('show results') }}
+                                @elseif ($game)
+                                {{ __('continue') }}
+                                @else (!$game)
+                                {{ __('START') }}
+                                @endif
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
