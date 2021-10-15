@@ -59,6 +59,11 @@
                         @endif
                         @else
 
+                        <li class="nav-item">
+                            <a class="nav-link" style="color: black;"
+                                href="{{ route('game.start') }}">{{ __('Start Quiz') }}</a>
+                        </li>
+
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -84,6 +89,17 @@
                                 </a>
                                 <a class="dropdown-item" href="{{ route('questions.create') }}">
                                     New Question
+                                </a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                Results
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('results.index') }}">
+                                    My results
                                 </a>
                             </div>
                         </li>
