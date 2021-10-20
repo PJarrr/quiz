@@ -23,6 +23,26 @@
                     </form>
 
 
+                    <div id="clockdiv" class="time">
+                        <h4>Quiz ends in:</h4>
+                        <div>
+                            <span class=" days"></span>
+                            <div class="smalltext">Days</div>
+                        </div>
+                        <div>
+                            <span class="hours"></span>
+                            <div class="smalltext">Hours</div>
+                        </div>
+                        <div>
+                            <span class="minutes"></span>
+                            <div class="smalltext">Minutes</div>
+                        </div>
+                        <div>
+                            <span class="seconds"></span>
+                            <div class="smalltext">Seconds</div>
+                        </div>
+                    </div>
+
 
 
                 </div>

@@ -11,12 +11,12 @@ class Quiz extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = ['user_id', 'title', 'password', 'description']; 
+    protected $fillable = ['user_id', 'title', 'password', 'description', 'time']; 
 
 
     public function questions()
     {
-        return $this->belongsToMany(Question::class);
+        return $this->belongsToMany(Question::class)->withTrashed();
     }
 
     public function user()

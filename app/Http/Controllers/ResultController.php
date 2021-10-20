@@ -16,7 +16,7 @@ class ResultController extends Controller
     {
         $user=User::find(auth()->id());
         $results = $user->results()->get();
-
+    
         return view('results.index', compact('results'));
     }
 
