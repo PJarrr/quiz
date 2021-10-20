@@ -1,21 +1,22 @@
-console.log("deadline counter on");
-
-console.log("deadline counter onnnnnnnnnnnnnnn");
+console.log("deadline counter onnnn");
 
 axios
     .get(timeURL)
     .then(function (response) {
-        //
-        console.log(response.data);
+        const game = response.data;
+        const quizTime = response.data.quiz.time;
 
-        let finishTime = new Date(Date.parse(new Date(response.data)));
+        const finishTime = new Date(
+            Date.parse(new Date(game.created_at)) + quizTime * 60000
+        );
 
         console.log(finishTime);
+        console.log(quizTime);
 
-        initializeClock("clockdiv", finishTime);
+        initializeClock("clockdiv", finishTime, game);
     })
     .catch(function (error) {
-        //console.log(error);
+        console.log(error);
     });
 
 function getTimeRemaining(endtime) {
@@ -33,7 +34,7 @@ function getTimeRemaining(endtime) {
     };
 }
 
-function initializeClock(id, endtime) {
+function initializeClock(id, endtime, game) {
     let clock = document.getElementById(id);
     let daysSpan = clock.querySelector(".days");
     let hoursSpan = clock.querySelector(".hours");
@@ -43,15 +44,17 @@ function initializeClock(id, endtime) {
     function updateClock() {
         let t = getTimeRemaining(endtime);
 
-        daysSpan.innerHTML = t.days;
-        hoursSpan.innerHTML = ("0" + t.hours).slice(-2);
-        minutesSpan.innerHTML = ("0" + t.minutes).slice(-2);
-        secondsSpan.innerHTML = ("0" + t.seconds).slice(-2);
+        if (t.total > 0) {
+            daysSpan.innerHTML = t.days;
+            hoursSpan.innerHTML = ("0" + t.hours).slice(-2);
+            minutesSpan.innerHTML = ("0" + t.minutes).slice(-2);
+            secondsSpan.innerHTML = ("0" + t.seconds).slice(-2);
+        }
 
         if (t.total <= 0) {
             clearInterval(timeinterval);
             window.location.replace(
-                "http://localhost/quiz/public/game/results/store/" //TODO: this does not  work, need to pass {game} somehow.
+                route("store-result", game) //TODO: this does not  work, need to pass {game} somehow.
             ); //when time ends - >redirects to store result
         }
     }

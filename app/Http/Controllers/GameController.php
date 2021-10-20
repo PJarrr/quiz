@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests\StoreAnswerRequest;
 use App\Http\Controllers\GameController;
+use App\Jobs\Heartbeat;
 
 
 class GameController extends Controller
@@ -37,13 +38,18 @@ class GameController extends Controller
         }
         Session::put('finishTime',$finishTime );
 
+        
+
         return view('game.lobby', compact('quiz', 'game', 'finishTime'));
     }
 
 
     public function play(Game $game)
     {   
-       
+      
+
+        $finishTime=$game->created_at->add($game->quiz->time, 'minute');
+        
         // Getting not answered questions
         $allQuestions = $game->quiz->questions()->get();
         $allGameAnswers = $game->answers()->get();
@@ -52,6 +58,7 @@ class GameController extends Controller
         $finishTime=$game->created_at->add($game->quiz->time, 'minute');
         
         Session::put('finishTime',$finishTime );
+        Session::put('game',$game );
 
         $answeredQuestions = collect([]);
 
@@ -83,12 +90,9 @@ class GameController extends Controller
            return redirect()->route('store-result', compact('game'));
         }
         
-
-        
-
-
-       
     }
+
+
     public function submitAnswer(StoreAnswerRequest $request, Game $game)  
     {
        
@@ -126,22 +130,12 @@ class GameController extends Controller
         return redirect()->route('game.play', compact('game'));
     }
 
-    
-    public function quizWasPlayedBefore($quiz_id)
-    {
-        return User::find(auth()->id())->startedQuizzes()->get()->contains($quiz_id); 
-    }
 
-
-    public function notAnsweredQuestions($quiz_id)
-    {   
-        
-    }
 
     public function time()
     {
-        $finishTime = new Carbon(Session::get('finishTime'));
-        return $finishTime;
+        $game = Session::get('game');
+        return $game;
     }
 
 
