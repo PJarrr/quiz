@@ -7,15 +7,16 @@ use App\Models\Game;
 use App\Models\Quiz;
 use App\Models\User;
 use App\Models\Answer;
+use App\Jobs\Heartbeat;
+use App\Jobs\StoreResult;
 use App\Models\StartedQuiz;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use App\Http\Controllers\GameController;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests\StoreAnswerRequest;
-use App\Http\Controllers\GameController;
-use App\Jobs\Heartbeat;
 
 
 class GameController extends Controller
@@ -26,9 +27,27 @@ class GameController extends Controller
     }
 
     public function lobby(Request $request)
+
+
     {   
         //check if user plays this quiz for the first time
+
+
+        // $games = Game::with('result')->get();
+
+        // foreach ($games as $game)
+        // {
+            
+        //     if (!$game->result()->count())
+        //     {
+        //          if (Carbon::now()->gt($game->created_at->add($game->quiz->time, 'minute')))
+        //          dd('daugiau');
+        //     }
+        // }
+        // dd($games);
         $quiz= Quiz::where('title', $request->quiz_title)->first();
+
+
 
         $game = Game::where('user_id', auth()->id())->where('quiz_id', $quiz->id)->first();
 
@@ -123,6 +142,9 @@ class GameController extends Controller
         if (!$game->count())
         {
             $game = Game::create(['user_id' => auth()->id(), 'quiz_id'=>$quiz_id ]); 
+
+            //in case a user exits quiz game without posting results manually.
+            StoreResult::dispatch($game)->delay(now()->addMinutes($game->quiz->time)->addSeconds(1));
         }
 
         $game = Game::where('user_id', auth()->id())->where('quiz_id', $quiz_id)->first();
