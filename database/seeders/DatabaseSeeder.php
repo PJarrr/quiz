@@ -94,13 +94,15 @@ class DatabaseSeeder extends Seeder
             'user_id' => 1,
             'title' => 'quiz1',
             'password'=>'123',
-            'description' =>'test quiz'
+            'description' =>'test quiz',
+            'time'=>1,
         ]);
          DB::table('quizzes')->insert([
             'user_id' => 2,
             'title' => 'quiz2',
             'password'=>'123',
-            'description' =>'test quiz'
+            'description' =>'test quiz',
+            'time'=>1,
         ]);
 
          DB::table('question_quiz')->insert([

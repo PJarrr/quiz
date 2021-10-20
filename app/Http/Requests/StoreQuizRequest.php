@@ -26,7 +26,8 @@ class StoreQuizRequest extends FormRequest
         return [
             'title' => 'required|min:3',
             'description' => 'required|max:200',
-            'password' =>'required'
+            'password' =>'required',
+            'time'=> 'required|integer|max:120'
         ];
     }
 }
