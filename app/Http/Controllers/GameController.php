@@ -142,6 +142,10 @@ class GameController extends Controller
         if (!$game->count())
         {
             $game = Game::create(['user_id' => auth()->id(), 'quiz_id'=>$quiz_id ]); 
+            //dd($game->quiz->questions);
+            $game->questions()->attach($game->quiz->questions); 
+
+
 
             //in case a user exits quiz game without posting results manually.
             StoreResult::dispatch($game)->delay(now()->addMinutes($game->quiz->time)->addSeconds(1));

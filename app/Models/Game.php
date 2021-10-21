@@ -28,4 +28,11 @@ class Game extends Model
     {
         return $this->hasOne(Result::class);
     }
+
+    public function questions()
+    {
+        return $this->belongsToMany(Question::class);
+    }
+
+
 }

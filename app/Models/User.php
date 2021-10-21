@@ -53,15 +53,15 @@ class User extends Authenticatable
     }
     public function games()
     {
-        return $this->hasMany(Question::class);
-    }
-    public function startedQuizzes()
-    {
-        return $this->hasMany(StartedQuiz::class);
+        return $this->hasMany(Game::class);
     }
     public function results()
     {
         return $this->hasManyThrough(Result::class, Game::class);
+    }
+    public function gameQuestions()
+    {
+        return $this->hasManyThrough(Question::class, Game::class);
     }
 
 
