@@ -40,7 +40,6 @@
                 <span class="fas fa-wallet"></span>
             </div>
         </div>
-
     </div>
 
     <div class="recent-grid">
@@ -58,36 +57,32 @@
                                     <td>Quiz Title</td>
                                     <td>Participants</td>
                                     <td>Average result</td>
-
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($user->quizzes as $quiz)
                                 <tr>
-                                    <td>{{$quiz->title}}</td>
+                                    <td>
+                                        {{$quiz->title}}
+                                    </td>
 
                                     <td>
                                         {{$quiz->games->count()}}
                                     </td>
 
                                     <td>
-
+                                        {{round( $quiz->results->sum('correct_answers')/($quiz->questions->count() *
+                                        $quiz->games->count())*100,2)}} %
                                     </td>
                                 </tr>
                                 @endforeach
-
-
                             </tbody>
                         </table>
                         <span>
-
                         </span>
                     </div>
                 </div>
-
             </div>
-
-
 
         </div>
         <div class="customers">
@@ -97,7 +92,6 @@
                     <button class="btn"><a href="">see all</a></button>
                 </div>
                 <div class="card-body">
-
                     <div class="customer">
                         <div class="info">
                             <div>
@@ -108,9 +102,6 @@
                         </div>
                         <div class="contact">
                             <span class="">
-
-
-
                         </div>
                     </div>
 
