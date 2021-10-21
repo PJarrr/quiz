@@ -51,6 +51,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Question::class);
     }
+    public function games()
+    {
+        return $this->hasMany(Question::class);
+    }
     public function startedQuizzes()
     {
         return $this->hasMany(StartedQuiz::class);
@@ -59,6 +63,7 @@ class User extends Authenticatable
     {
         return $this->hasManyThrough(Result::class, Game::class);
     }
+
 
 
 
