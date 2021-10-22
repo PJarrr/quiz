@@ -42,9 +42,6 @@
                             <div class="smalltext">Seconds</div>
                         </div>
                     </div>
-
-
-
                 </div>
 
             </div>
