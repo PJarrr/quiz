@@ -94,42 +94,47 @@
                         </div>
                     </div>
                 </div>
-
             </div>
+
+
             <div class="customers">
                 <div class="card">
                     <div class="card-header">
-                        <h2>My recent results</h2>
-                        <button class="btn"><a href="">see all</a></button>
+                        <h2>New Customers</h2>
+                        <button>See all <span class="fas fa-arrow-right"></span> </button>
                     </div>
-                    <div class="card-body">
 
-                        @foreach ($user->results as $result )
-                        <div class="customer">
-                            <div class="info">
-                                <div>
-                                    <h4> <a href="{{route('game.results.show', [$result->game, $result] )}}">{{$result->game->quiz->title}}<a>
-                                    </h4>
-                                    <small>By {{$result->game->quiz->user->name}}</small>
-                                </div>
-                            </div>
-                            <div class="contact">
-                                <span class="">
-                                    @if ($result->correct_answers === 0)
+                    <table>
+                        <tbody>
+                            @foreach ($user->results as $result )
+                            <tr>
+                                <td data-title="Column #1"><a
+                                        href="{{route('game.results.show', [$result->game, $result] )}}">{{$result->game->quiz->title}}<a>
+                                </td>
+                                <td data-title="Column #2">By {{$result->game->quiz->user->name}}</td>
+                                <td data-title="Column #3">@if ($result->correct_answers === 0)
                                     0
                                     @else
-                                    <h4>{{($result->correct_answers / $result->game->quiz->questions->count()) *100 }} %
-                                    </h4>
-                                    @endif
+                                    {{($result->correct_answers / $result->game->quiz->questions->count())
+                                    *100 }} %
+                                    @endif</td>
+
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
 
 
-                            </div>
-                        </div>
-                        @endforeach
 
-                    </div>
+
+
+
+
+
+
+
+
                 </div>
-
             </div>
 
         </div>
