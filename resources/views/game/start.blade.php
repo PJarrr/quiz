@@ -7,12 +7,13 @@
             <div class="card">
                 <div class="card-header">{{ __('Play Quiz') }}</div>
                 <div class="card-body">
-                    <form method="POST" action="{{route('game.lobby')}}">
+                    <form method="POST" class="" action="{{route('game.lobby')}}">
                         @csrf
 
                         <div class="form-group row">
-                            <label for="title"
-                                class="col-md-4 col-form-label text-md-right">{{ __('Enter Quiz Title') }}</label>
+
+                            <label for="title" class="col-md-4 col-form-label text-md-right">{{ __('Quiz Title')
+                                }}</label>
 
                             <div class="col-md-6">
                                 <input id="title" type="text"
@@ -25,6 +26,28 @@
                                 </span>
                                 @enderror
                             </div>
+
+
+                            <label for="quiz_password" class="col-md-4 col-form-label text-md-right">{{ __('Password')
+                                }}</label>
+
+                            <div class="col-md-6">
+                                <input id="quiz_password" required type="password"
+                                    class="form-control @error('quiz_password') is-invalid @enderror"
+                                    name="quiz_password" value="{{ old('quiz_password') }}" required autofocus>
+
+
+                                <span class="invalid-feedback" role="alert">
+                                    @if(session()->has('info_message'))
+                                    <div class="alert alert-info" role="alert">
+                                        {{session()->get('info_message')}}
+                                    </div>
+                                    @endif
+                                </span>
+
+                            </div>
+
+
                             <button type="submit" class="btn btn-primary">
                                 {{ __('Enter') }}
                             </button>

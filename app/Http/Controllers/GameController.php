@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests\StoreAnswerRequest;
 
 
+
 class GameController extends Controller
 {
     public function start()
@@ -30,34 +31,22 @@ class GameController extends Controller
 
 
     {   
-        //check if user plays this quiz for the first time
-
-
-        // $games = Game::with('result')->get();
-
-        // foreach ($games as $game)
-        // {
-            
-        //     if (!$game->result()->count())
-        //     {
-        //          if (Carbon::now()->gt($game->created_at->add($game->quiz->time, 'minute')))
-        //          dd('daugiau');
-        //     }
-        // }
-        // dd($games);
         $quiz= Quiz::where('title', $request->quiz_title)->first();
+        $password =  $request->quiz_password;
 
-
-
+        if(!$quiz || $password != $quiz->password)
+        {
+            return redirect()->route('game.start')->with('info_message', 'Wrong quiz title or password');
+        }
+    
         $game = Game::where('user_id', auth()->id())->where('quiz_id', $quiz->id)->first();
 
         $finishTime = '';
-        if($game){  
+        if($game)
+        {  
             $finishTime=$game->created_at->add($quiz->time, 'minute');
         }
         Session::put('finishTime',$finishTime );
-
-        
 
         return view('game.lobby', compact('quiz', 'game', 'finishTime'));
     }
