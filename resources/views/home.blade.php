@@ -1,5 +1,5 @@
 @extends('layouts.app')
-{{-- //{{dd($gameQuestionsCount)}} --}}
+
 @section('content')
 <link href="{{ asset('css/home.css') }}" rel="stylesheet">
 <main>
@@ -35,8 +35,8 @@
             <div class="card-single">
                 <div>
                     <h1>
-                        @if ($user->results->sum('correct_answers') != 0 && $gameQuestionsCount != 0)
-                        {{round(($user->results->sum('correct_answers') / $gameQuestionsCount)*100,2)}}
+                        @if ($user->results->sum('correct_answers') != 0 && $totalAnsweredQuestions != 0)
+                        {{round(($user->results->sum('correct_answers') / $totalAnsweredQuestions)*100,2)}}
                         @else
                         No data to show
                         @endif
