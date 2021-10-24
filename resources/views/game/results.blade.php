@@ -47,20 +47,6 @@ $answers = $game->answers;
                     </div>
                     <hr>
                     @endforeach
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                 </div>
 
             </div>
