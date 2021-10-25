@@ -24,12 +24,12 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="quiz_password" class="col-md-4 col-form-label text-md-right">{{ __('Password')
+                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password')
                                 }}</label>
                             <div class="col-md-6">
-                                <input id="quiz_password" required type="password"
-                                    class="form-control @error('quiz_password') is-invalid @enderror"
-                                    name="quiz_password" value="{{ old('quiz_password') }}" required autofocus>
+                                <input id="password" required type="password"
+                                    class="form-control @error('password') is-invalid @enderror" name="password"
+                                    value="{{ old('password') }}" required autofocus>
 
                             </div>
                         </div>
