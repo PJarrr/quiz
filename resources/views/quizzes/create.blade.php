@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('Create New Quiz') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('quizzes.store') }}">
+                    <form method="POST" autocomplete="off" action="{{ route('quizzes.store') }}">
                         @csrf
 
                         <div class="form-group row">
@@ -16,7 +16,7 @@
 
                             <div class="col-md-6">
                                 <input id="title" type="text" class="form-control @error('title') is-invalid @enderror"
-                                    name="title" value="{{ old('title') }}" required autocomplete="title" autofocus>
+                                    name="title" value="{{ old('title') }}" required autofocus autocomplete="off">
 
                                 @error('title')
                                 <span class="invalid-feedback" role="alert">
@@ -42,13 +42,14 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password')
+                            <label for="password" class="col-md-4 col-form-label text-md-right">{{
+                                __('Password')
                                 }}</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password"
+                                <input autocomplete="off" id="password" type="password"
                                     class="form-control @error('password') is-invalid @enderror" name="password"
-                                    required autocomplete="new-password">
+                                    required>
 
                                 @error('password')
                                 <span class="invalid-feedback" role="alert">
@@ -63,9 +64,8 @@
                                 }}</label>
 
                             <div class="col-md-6">
-                                <input id="time" number type="text"
-                                    class="form-control @error('password') is-invalid @enderror" name="time" required
-                                    autocomplete="new-password">
+                                <input autocomplete="off" id="time" number type="text"
+                                    class="form-control @error('password') is-invalid @enderror" name="time" required>
 
                                 @error('time')
                                 <span class="invalid-feedback" role="alert">

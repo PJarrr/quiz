@@ -54,7 +54,7 @@
                 <div class="card">
                     <div class="card-header">
                         <h2>My quizes</h2>
-                        <button class="btn"><a href="">see all</a></button>
+                        <button class="btn"><a href="{{route('quizzes.index')}}">see all</a></button>
                     </div>
                     <div class=" card-body">
                         <div class="table-responsive">
@@ -100,8 +100,8 @@
             <div class="customers">
                 <div class="card">
                     <div class="card-header">
-                        <h2>New Customers</h2>
-                        <button>See all <span class="fas fa-arrow-right"></span> </button>
+                        <h2>My Recent Results</h2>
+                        <button class="btn"><a href="{{route('results.index')}}">see all</a></button>
                     </div>
 
                     <table>
@@ -115,25 +115,14 @@
                                 <td data-title="Column #3">@if ($result->correct_answers === 0)
                                     0
                                     @else
-                                    {{($result->correct_answers / $result->game->quiz->questions->count())
-                                    *100 }} %
+                                    {{ round(($result->correct_answers / $result->game->quiz->questions->count())
+                                    *100,2 )}} %
                                     @endif</td>
 
                             </tr>
                             @endforeach
                         </tbody>
                     </table>
-
-
-
-
-
-
-
-
-
-
-
                 </div>
             </div>
 
