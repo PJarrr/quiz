@@ -7,13 +7,13 @@
             <div class="card">
                 <div class="card-header">{{ __('Play Quiz') }}</div>
                 <div class="card-body">
-                    <form method="POST" class="" action="{{route('game.lobby')}}">
+                    <form method="POST" class="" action="{{route('game.lobby')}}" autocomplete="off">
                         @csrf
                         <div class="form-group row">
                             <label for="title" class="col-md-4 col-form-label text-md-right">{{ __('Quiz Title')
                                 }}</label>
                             <div class="col-md-6">
-                                <input id="title" type="text"
+                                <input autocomplete="off" id="title" type="text"
                                     class="form-control @error('quiz_title') is-invalid @enderror" name="quiz_title"
                                     value="{{ old('quiz_title') }}" required autofocus>
                                 @error('title')
@@ -29,7 +29,7 @@
                             <div class="col-md-6">
                                 <input id="password" required type="password"
                                     class="form-control @error('password') is-invalid @enderror" name="password"
-                                    value="{{ old('password') }}" required autofocus>
+                                    value="{{ old('password') }}" autofocus autocomplete="off">
 
                             </div>
                         </div>
