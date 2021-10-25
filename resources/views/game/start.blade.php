@@ -30,13 +30,7 @@
                                 <input id="quiz_password" required type="password"
                                     class="form-control @error('quiz_password') is-invalid @enderror"
                                     name="quiz_password" value="{{ old('quiz_password') }}" required autofocus>
-                                <span class="invalid-feedback" role="alert">
-                                    @if(session()->has('info_message'))
-                                    <div class="alert alert-info" role="alert">
-                                        {{session()->get('info_message')}}
-                                    </div>
-                                    @endif
-                                </span>
+
                             </div>
                         </div>
 

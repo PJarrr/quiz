@@ -11,13 +11,15 @@ use App\Jobs\Heartbeat;
 use App\Jobs\StoreResult;
 use App\Models\StartedQuiz;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
+use App\Rules\ValidateQuizPassword;
 use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\GameController;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests\StoreAnswerRequest;
-
+use Illuminate\Support\Facades\Validator;
 
 
 class GameController extends Controller
@@ -29,15 +31,24 @@ class GameController extends Controller
 
     public function lobby(Request $request)
 
-
     {   
+       $validator = Validator::make($request->all(),
+        [
+            'quiz_title' => ['required', 'exists:App\Models\Quiz,title'],
+            
+            'password' => ['required', 
+            Rule::exists('quizzes')->where('title', $request->quiz_title)
+            ]        
+        ],
+        );
+        if ($validator->fails()) {
+            $request->flash();
+            return redirect()->back()->withErrors($validator);
+
+        }
+        
         $quiz= Quiz::where('title', $request->quiz_title)->first();
         $password =  $request->quiz_password;
-
-        if(!$quiz || $password != $quiz->password)
-        {
-            return redirect()->route('game.start')->with('info_message', 'Wrong quiz title or password');
-        }
     
         $game = Game::where('user_id', auth()->id())->where('quiz_id', $quiz->id)->first();
 
@@ -54,8 +65,6 @@ class GameController extends Controller
 
     public function play(Game $game)
     {   
-      
-
         $finishTime=$game->created_at->add($game->quiz->time, 'minute');
         
         // Getting not answered questions
@@ -100,19 +109,14 @@ class GameController extends Controller
         
     }
 
-
     public function submitAnswer(StoreAnswerRequest $request, Game $game)  
     {
-       
-        
         $answer = Answer::create([
             'user_id' => auth()->id(),
             'game_id'=> $game->id,
             'question_id'=>$request->question_id,
             'answer'=>$request->answer]);
             
-
-
             $game->answers()->attach(1, [
             'user_id' => auth()->id(),
             'game_id'=> $game->id,
@@ -120,7 +124,6 @@ class GameController extends Controller
 
         return redirect()->route('game.play', compact('game'));
     }
-
 
     public function store(Request $request)  
     {
@@ -134,8 +137,6 @@ class GameController extends Controller
             //dd($game->quiz->questions);
             $game->questions()->attach($game->quiz->questions); 
 
-
-
             //in case a user exits quiz game without posting results manually.
             StoreResult::dispatch($game)->delay(now()->addMinutes($game->quiz->time)->addSeconds(1));
         }
@@ -144,8 +145,6 @@ class GameController extends Controller
 
         return redirect()->route('game.play', compact('game'));
     }
-
-
 
     public function time()
     {
