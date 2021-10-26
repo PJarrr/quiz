@@ -24,11 +24,11 @@ class StoreQuestionRequest extends FormRequest
     public function rules()
     {
         return [
-            'question_text' =>'required|min:3',
-            'correct_answer' =>'required',
-            'incorrect_answer1' =>'required',
-            'incorrect_answer2' =>'required',
-            'incorrect_answer3' =>'required',
+            'question_text' =>'required|min:3|max:100',
+            'correct_answer' =>'required|max:50',
+            'incorrect_answer1' =>'required|max:50',
+            'incorrect_answer2' =>'required|max:50',
+            'incorrect_answer3' =>'required|max:50',
         ];
     }
 }

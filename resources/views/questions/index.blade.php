@@ -12,10 +12,9 @@
                         <thead>
                             <tr>
                                 <th>Question</th>
-                                <th>Actions</th>
+                                <th class="w-25">Actions</th>
                             </tr>
                         </thead>
-
                         <tbody>
                             @foreach ($questions as $question )
                             <tr>

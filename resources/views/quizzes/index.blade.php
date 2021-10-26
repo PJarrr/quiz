@@ -11,9 +11,9 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>Title</th>
-                                <th>Description</th>
-                                <th>Actions</th>
+                                <th style="width:40%;">Title</th>
+                                <th style="width:40%;">Description</th>
+                                <th style="width:20%;">Actions </th>
                             </tr>
                         </thead>
                         <tbody>

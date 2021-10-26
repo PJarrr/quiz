@@ -61,9 +61,9 @@
                             <table width="100%">
                                 <thead>
                                     <tr>
-                                        <td>Quiz Title</td>
-                                        <td>Participants</td>
-                                        <td>Average result</td>
+                                        <td style="width:60%;">Quiz Title</td>
+                                        <td style="width:10%;">Participants</td>
+                                        <td style="width:10%;">Average result</td>
                                     </tr>
                                 </thead>
                                 <tbody>
