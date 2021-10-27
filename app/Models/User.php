@@ -8,9 +8,11 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
+
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
+    use \Staudenmeir\EloquentHasManyDeep\HasRelationships;
 
     /**
      * The attributes that are mass assignable.
@@ -53,16 +55,22 @@ class User extends Authenticatable
     }
     public function games()
     {
-        return $this->hasMany(Question::class);
-    }
-    public function startedQuizzes()
-    {
-        return $this->hasMany(StartedQuiz::class);
+        return $this->hasMany(Game::class);
     }
     public function results()
     {
         return $this->hasManyThrough(Result::class, Game::class);
     }
+
+    //returns all questions of all games
+      public function gamesQestions()
+    {
+        return $this->hasManyDeep(Question::class, [Game::class, 'game_question']);
+    }
+
+    
+
+    
 
 
 

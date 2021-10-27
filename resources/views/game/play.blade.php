@@ -5,12 +5,26 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Please answer the question') }}</div>
+
+                <div class="card-header">
+                    <h3>Quiz in progress, answer questions</h3>
+                    <div id="clockdiv" class="time">
+                        <span>Deadline in: </span>
+                        <span class=" days"></span>
+                        <span class="smalltext">Days </span>
+                        <span class="hours"></span>
+                        <span class="smalltext">Hours</span>
+                        <span class="minutes"></span>
+                        <span class="smalltext">Minutes</span>
+                        <span class="seconds"></span>
+                        <span class="smalltext">Seconds</span>
+                    </div>
+                </div>
                 <div class="card-body">
                     <form class="d-flex flex-column" method="post" action="{{route('game.submitAnswer', $game)}}">
                         @method('POST')
-                        id:{{$question_id}}
-                        Question:{{$question_text}}
+                        <h4>Question {{$game->answers->count()+1}} / {{$game->questions->count()}} : {{$question_text}}
+                        </h4>
                         @foreach ($options as $option )
                         <div>
                             <input type="radio" name="answer" value="{{$option}}"> {{$option}}
@@ -18,35 +32,9 @@
                         </div>
                         @endforeach
                         @csrf
-
                         <button class="btn btn-primary mt-3" type="submit">Submit answer</button>
                     </form>
-
-
-                    <div id="clockdiv" class="time">
-                        <h4>Quiz ends in:</h4>
-                        <div>
-                            <span class=" days"></span>
-                            <div class="smalltext">Days</div>
-                        </div>
-                        <div>
-                            <span class="hours"></span>
-                            <div class="smalltext">Hours</div>
-                        </div>
-                        <div>
-                            <span class="minutes"></span>
-                            <div class="smalltext">Minutes</div>
-                        </div>
-                        <div>
-                            <span class="seconds"></span>
-                            <div class="smalltext">Seconds</div>
-                        </div>
-                    </div>
-
-
-
                 </div>
-
             </div>
         </div>
     </div>

@@ -24,7 +24,7 @@ class StoreQuizRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|min:3',
+            'title' => 'required|min:3|max:50',
             'description' => 'required|max:200',
             'password' =>'required',
             'time'=> 'required|integer|max:120'

@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Quiz;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -23,7 +26,18 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $user = auth()->user();
-        return view('home', compact('user'));
+        $user = Auth::user();
+
+       // $allQuestions = $user->gamesQestions()->count();
+        
+        $userQuizzes = Quiz::where('user_id', $user->id)->paginate(3);
+
+        $userGames = $user->games;
+
+        
+        $totalAnsweredQuestions = $user->gamesQestions()->count();
+        
+    
+        return view('home', compact('user', 'userQuizzes', 'totalAnsweredQuestions'));
     }
 }
