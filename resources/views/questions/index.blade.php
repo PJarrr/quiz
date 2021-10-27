@@ -16,7 +16,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($questions as $question )
+                            @forelse($questions as $question )
                             <tr>
                                 <td>
                                     <a href="{{route('questions.show', $question)}}">{{$question->question_text}}</a>
@@ -33,8 +33,13 @@
                                     </form>
                                 </td>
                             </tr>
-
-                            @endforeach
+                            @empty
+                            <tr>
+                                <td>
+                                    no questions yet, please hit the button above to create!
+                                </td>
+                            </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>

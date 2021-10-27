@@ -23,10 +23,8 @@
                 <div class="card-body">
                     <form class="d-flex flex-column" method="post" action="{{route('game.submitAnswer', $game)}}">
                         @method('POST')
-
                         <h4>Question {{$game->answers->count()+1}} / {{$game->questions->count()}} : {{$question_text}}
                         </h4>
-
                         @foreach ($options as $option )
                         <div>
                             <input type="radio" name="answer" value="{{$option}}"> {{$option}}
@@ -34,14 +32,9 @@
                         </div>
                         @endforeach
                         @csrf
-
                         <button class="btn btn-primary mt-3" type="submit">Submit answer</button>
                     </form>
-
-
-
                 </div>
-
             </div>
         </div>
     </div>

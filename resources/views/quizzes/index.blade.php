@@ -17,7 +17,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($quizzes as $quiz )
+                            @forelse ($quizzes as $quiz )
                             <tr>
                                 <td>
                                     <a href="{{route('quizzes.show', $quiz)}}">{{$quiz->title}}</a>
@@ -36,8 +36,14 @@
                                     </form>
                                 </td>
                             </tr>
+                            @empty
+                            <tr>
+                                <td>
+                                    No quizzes yet, please create!
+                                </td>
+                            </tr>
 
-                            @endforeach
+                            @endforelse
                         </tbody>
                     </table>
 
