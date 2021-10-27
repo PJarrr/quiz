@@ -30,3 +30,6 @@ User of this website can:
 
 -   Create simple, not-fancy user inferface using Boostrap.
 -   Create quiz game deadline timer with vanilla JavaScript.
+
+
+### LinkedIn: https://www.linkedin.com/in/paulius-jarutis/
