@@ -108,6 +108,10 @@ class DatabaseSeeder extends Seeder
 
          DB::table('question_quiz')->insert([
             'quiz_id' => 5,
+            'question_id' => 5,
+        ]);
+         DB::table('question_quiz')->insert([
+            'quiz_id' => 5,
             'question_id' => 15,
         ]);
          DB::table('question_quiz')->insert([
@@ -127,10 +131,7 @@ class DatabaseSeeder extends Seeder
             'quiz_id' => 15,
             'question_id' => 55,
         ]);
-         DB::table('question_quiz')->insert([
-            'quiz_id' => 15,
-            'question_id' => 65,
-        ]);
+     
 
         
 
