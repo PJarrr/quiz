@@ -119,7 +119,7 @@ class DatabaseSeeder extends Seeder
             'question_id' => 25,
         ]);
          DB::table('question_quiz')->insert([
-            'quiz_id' => 5,
+            'quiz_id' => 15,
             'question_id' => 35,
         ]);
 
