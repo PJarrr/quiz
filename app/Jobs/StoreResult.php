@@ -35,6 +35,7 @@ class StoreResult implements ShouldQueue
     {
          if (!Result::all()->contains($this->game->result()->first()))
         {
+            dd('storeresult job');
             $totalQuestionsCount = $this->game->quiz->questions->count();
             $allAnswers = $allGameAnswers = $this->game->answers()->get();
             $correctAnswers= 0;
