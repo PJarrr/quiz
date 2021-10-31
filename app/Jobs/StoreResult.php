@@ -9,6 +9,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
+use IlluminateSupportFacadesRedis;
 
 class StoreResult implements ShouldQueue
 {
@@ -35,6 +36,7 @@ class StoreResult implements ShouldQueue
     {
          if (!Result::all()->contains($this->game->result()->first()))
         {
+            
             $totalQuestionsCount = $this->game->quiz->questions->count();
             $allAnswers = $allGameAnswers = $this->game->answers()->get();
             $correctAnswers= 0;
