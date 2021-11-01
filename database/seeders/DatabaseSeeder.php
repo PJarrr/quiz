@@ -43,7 +43,7 @@ class DatabaseSeeder extends Seeder
             
             'user_id' => 5,
             'question_text'=>'Capital of Poland?', 
-            'correct_answer'=>'Washawa',
+            'correct_answer'=>'Washaw',
             'incorrect_answer1'=>'Krakow',
             'incorrect_answer2'=>'Gdansk',
             'incorrect_answer3'=>'Vilnius',
@@ -90,21 +90,96 @@ class DatabaseSeeder extends Seeder
             'incorrect_answer3'=>'Larry Page',
             
         ]);
+         DB::table('questions')->insert([
+            
+            'user_id' => 5,
+            'question_text'=>'Which is the tallest animal?', 
+            'correct_answer'=>'Giraffe',
+            'incorrect_answer1'=>'Horse',
+            'incorrect_answer2'=>'Python',
+            'incorrect_answer3'=>'Dog',
+            
+        ]);
+         DB::table('questions')->insert([
+            
+            'user_id' => 5,
+            'question_text'=>'How many legs does a spider have?', 
+            'correct_answer'=>'8',
+            'incorrect_answer1'=>'6',
+            'incorrect_answer2'=>'12',
+            'incorrect_answer3'=>'7',
+            
+        ]);
+         DB::table('questions')->insert([
+            
+            'user_id' => 5,
+            'question_text'=>'How long can Emperor Penguins stay underwater?', 
+            'correct_answer'=>'27 minutes',
+            'incorrect_answer1'=>'15 minutes',
+            'incorrect_answer2'=>'1 hour',
+            'incorrect_answer3'=>'3 minutes',
+        ]);
+
+         DB::table('questions')->insert([
+            
+            'user_id' => 15,
+            'question_text'=>'What is Kwik-E-Mart worker Apu\'s last name??', 
+            'correct_answer'=>'Nahasapeemapetilon',
+            'incorrect_answer1'=>'Patel',
+            'incorrect_answer2'=>'Gumble',
+            'incorrect_answer3'=>'Smith',
+            
+        ]);
+         DB::table('questions')->insert([
+            
+            'user_id' => 15,
+            'question_text'=>'On what TV show did early shorts of the The Simpsons air?', 
+            'correct_answer'=>'The Tracey Ullman Show',
+            'incorrect_answer1'=>'Saturday Night Live',
+            'incorrect_answer2'=>'Larry King Live',
+            'incorrect_answer3'=>'Late Show with Stephen Colbert',
+        ]);
+
+         DB::table('questions')->insert([
+            
+            'user_id' => 15,
+            'question_text'=>'What\'s the name of Bart Simpson\'s best friend?', 
+            'correct_answer'=>'Milhouse',
+            'incorrect_answer1'=>'Karl',
+            'incorrect_answer2'=>'Jimbo',
+            'incorrect_answer3'=>'Otto',
+        ]);
 
          DB::table('quizzes')->insert([
             'user_id' => 5,
             'title' => 'Capitals',
             'password'=>'123',
-            'description' =>'test quiz about coutry capital cities',
-            'time'=>2,
+            'description' =>'Test quiz about coutry capital cities',
+            'time'=>1,
         ]);
          DB::table('quizzes')->insert([
             'user_id' => 15,
             'title' => 'People',
             'password'=>'123',
             'description' =>'Test quiz about famous people',
-            'time'=>2,
+            'time'=>1,
         ]);
+         DB::table('quizzes')->insert([
+            'user_id' => 5,
+            'title' => 'Animals',
+            'password'=>'123',
+            'description' =>'Test quiz about animals',
+            'time'=>1,
+        ]);
+
+         DB::table('quizzes')->insert([
+            'user_id' => 15,
+            'title' => 'Simpsons',
+            'password'=>'123',
+            'description' =>'Test quiz about the Simpsons',
+            'time'=>1,
+        ]);
+
 
          DB::table('question_quiz')->insert([
             'quiz_id' => 5,
@@ -130,6 +205,31 @@ class DatabaseSeeder extends Seeder
          DB::table('question_quiz')->insert([
             'quiz_id' => 15,
             'question_id' => 55,
+        ]);
+
+             DB::table('question_quiz')->insert([
+            'quiz_id' => 25,
+            'question_id' => 65,
+        ]);
+        DB::table('question_quiz')->insert([
+            'quiz_id' => 25,
+            'question_id' => 75,
+        ]);
+        DB::table('question_quiz')->insert([
+            'quiz_id' => 25,
+            'question_id' => 85,
+        ]);
+        DB::table('question_quiz')->insert([
+            'quiz_id' => 35,
+            'question_id' => 95,
+        ]);
+        DB::table('question_quiz')->insert([
+            'quiz_id' => 35,
+            'question_id' => 105,
+        ]);
+        DB::table('question_quiz')->insert([
+            'quiz_id' => 35,
+            'question_id' => 115,
         ]);
      
 
