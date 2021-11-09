@@ -32,4 +32,9 @@
         <div class="row">
     </main>
 
+
     @endsection
+</body>
+
+</html>
+
