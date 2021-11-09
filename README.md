@@ -4,7 +4,7 @@
 
 ###
 
-#### Project available at:
+#### Project available at: https://tranquil-ocean-02135.herokuapp.com/
 
 I developed this website to practice and increase my programming skills. Biggest focus to backend which was created with Laravel.
 
@@ -30,6 +30,5 @@ User of this website can:
 
 -   Create simple, not-fancy user inferface using Boostrap.
 -   Create quiz game deadline timer with vanilla JavaScript.
-
 
 ### LinkedIn: https://www.linkedin.com/in/paulius-jarutis/
