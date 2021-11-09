@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="card-header">{{ __('Create Question') }}</div>
                 <div class="card-body">
-                    <form method="POST" action="{{ route('questions.store') }}">
+                    <form method="POST" action="{{ route('questions.store') }}" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group row">
                             <label for="question_text" class="col-md-4 col-form-label text-md-right">{{ __('Question')
@@ -26,7 +26,7 @@
                         </div>
                         <div class="form-group row">
                             <label for="correct_answer" class="col-md-4 col-form-label text-md-right">{{ __('Correct
-                                answer') }}</label>
+                                answer*') }}</label>
                             <div class="col-md-6">
                                 <input id="correct_answer" type="text"
                                     class="form-control @error('correct_answer') is-invalid @enderror"
@@ -44,7 +44,7 @@
                                 __('Incorrect answer') }}</label>
                             <div class="col-md-6">
                                 <input id="incorrect_answer1" type="text"
-                                    class="form-control @error('incorrect_answer1') is-invalid @enderror"
+                                    class="form-control @error('incorrect_answer1*') is-invalid @enderror"
                                     name="incorrect_answer1" value="{{ old('incorrect_answer1') }}" required
                                     autocomplete="incorrect_answer1" autofocus>
                                 @error('incorrect_answer1')
@@ -56,7 +56,7 @@
                         </div>
                         <div class="form-group row">
                             <label for="incorrect_answer2" class="col-md-4 col-form-label text-md-right">{{
-                                __('Incorrect answer') }}</label>
+                                __('Incorrect answer*') }}</label>
                             <div class="col-md-6">
                                 <input id="incorrect_answer2" type="text"
                                     class="form-control @error('incorrect_answer2') is-invalid @enderror"
@@ -71,7 +71,7 @@
                         </div>
                         <div class="form-group row">
                             <label for="incorrect_answer3" class="col-md-4 col-form-label text-md-right">{{
-                                __('Incorrect answer') }}</label>
+                                __('Incorrect answer*') }}</label>
                             <div class="col-md-6">
                                 <input id="incorrect_answer3" type="text"
                                     class="form-control @error('incorrect_answer3') is-invalid @enderror"
@@ -82,6 +82,13 @@
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="image" class="col-md-4 col-form-label text-md-right">{{
+                                __('Upload image') }}</label>
+                            <div class="col-md-6">
+                                <input id="image" type="file" class="" name="image">
                             </div>
                         </div>
                         <div class="form-group row mb-0">

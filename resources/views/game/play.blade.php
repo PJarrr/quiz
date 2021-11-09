@@ -6,7 +6,7 @@
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="card">
-                {{-- <img class="card-img-top" src="@if ($question->img) question->img @endif" alt="img"> --}}
+                <img class="card-img-top" src="{{$question_img}}" alt="">
                 <div class="card-body">
                     <h6 class="card-subtitle mb-2 text-muted">
                         <div id="clockdiv" class="time">

@@ -11,7 +11,7 @@ class Question extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = ['user_id', 'question_text', 'correct_answer', 'incorrect_answer1', 'incorrect_answer2', 'incorrect_answer3'];
+    protected $fillable = ['user_id', 'question_text', 'correct_answer', 'incorrect_answer1', 'incorrect_answer2', 'incorrect_answer3', 'image'];
 
     public function user()
     {
