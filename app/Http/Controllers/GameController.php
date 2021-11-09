@@ -44,7 +44,6 @@ class GameController extends Controller
         if ($validator->fails()) {
             $request->flash();
             return redirect()->back()->withErrors($validator);
-
         }
         
         $quiz= Quiz::where('title', $request->quiz_title)->first();
@@ -91,6 +90,7 @@ class GameController extends Controller
         {
             $question = $unansweredQuestions->first();
             $question_id = $question->id;
+            $question_img=$question->image;
             $question_text = $question->question_text;
             $options = [
                 $question->correct_answer,
@@ -100,7 +100,7 @@ class GameController extends Controller
             ];
             shuffle($options);
     
-            return view('game.play', compact('game','question_id', 'question_text', 'options'));
+            return view('game.play', compact('game','question_id', 'question_text', 'options', 'question_img'));
             
         } else { //if no unanswered questions left - show results
 

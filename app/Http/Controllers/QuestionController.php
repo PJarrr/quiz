@@ -40,9 +40,22 @@ class QuestionController extends Controller
      */
     public function store(StoreQuestionRequest $request)
     {
+        // $image = '';
         
+        //dd($url);
         $question = Question::create($request->validated() + ['user_id' => auth()->id()]);
         
+
+        if($request->hasFile('image')){
+            $image = $request->file('image');
+            $imageName = uniqid('img_');
+            $path = public_path() . '/images/';
+            $url = asset('images/'.$imageName);
+            $image -> move($path, $imageName);
+            // dd($url);
+            $question->update(['image' => $url]);
+        }
+
         return redirect()->route('questions.index');
 
         

@@ -29,6 +29,7 @@ class StoreQuestionRequest extends FormRequest
             'incorrect_answer1' =>'required|max:50',
             'incorrect_answer2' =>'required|max:50',
             'incorrect_answer3' =>'required|max:50',
+
         ];
     }
 }
