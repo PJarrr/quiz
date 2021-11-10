@@ -1,13 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
+<link href="{{ asset('css/login.css') }}" rel="stylesheet">
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('My questions') }}</div>
                 <div class="card-body">
-                    <a class="btn btn-primary" href="{{route('questions.create')}}">new question</a> <br> <br>
+                    <h2 class="title mb-3"> {{ __('My Questions') }}</h2>
+                    <a class="cta-btn-sm p-3 mt-3" href="{{route('questions.create')}}">Add Question</a> <br> <br>
                     <table class="table">
                         <thead>
                             <tr>
@@ -42,6 +43,7 @@
                             @endforelse
                         </tbody>
                     </table>
+                    <span>{{$questions->links()}}</span>
                 </div>
             </div>
         </div>

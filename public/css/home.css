@@ -7,9 +7,7 @@
 }
 
 main {
-    padding: 2rem 1.5rem;
     background: #f1f5f9;
-    min-height: calc(100vh - 90px);
 }
 
 a:link {
@@ -69,10 +67,13 @@ a {
 .card-header {
     display: flex;
     justify-content: space-between;
+    flex-direction: row;
     align-items: center;
+    word-wrap: normal;
+
     border-bottom: 1px solid #f0f0f0;
 }
-.card-header .btn {
+.btn {
     background: var(--main-color);
     border-radius: 10px;
     color: #fff;

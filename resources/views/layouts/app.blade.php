@@ -26,6 +26,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/login.css') }}" rel="stylesheet">
 
     @routes
 </head>
@@ -135,7 +136,7 @@
             </div>
         </nav>
 
-        <main class="py-4">
+        <main class="">
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-md-9">

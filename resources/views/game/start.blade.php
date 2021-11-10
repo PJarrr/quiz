@@ -3,42 +3,40 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-4">
             <div class="card">
-                <div class="card-header">{{ __('Play Quiz') }}</div>
+                <h2 class="title"> {{ __('Play Quiz') }}</h2>
                 <div class="card-body">
                     <form method="POST" class="" action="{{route('game.lobby')}}" autocomplete="off">
                         @csrf
-                        <div class="form-group row">
-                            <label for="title" class="col-md-4 col-form-label text-md-right">{{ __('Quiz Title')
+                        <div class="email-login">
+                            <label for="title">{{ __('Quiz title')
                                 }}</label>
-                            <div class="col-md-6">
-                                <input autocomplete="off" id="title" type="text"
-                                    class="form-control @error('quiz_title') is-invalid @enderror" name="quiz_title"
-                                    value="{{ old('quiz_title') }}" required autofocus>
+                            <div class="">
+                                <input id="title" type="title"
+                                    class="form-control mt-1 @error('title') is-invalid @enderror" name="quiz_title"
+                                    value="{{ old('quiz_title') }}" required autocomplete="title" autofocus>
                                 @error('title')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password')
+                            <label for="password">{{ __('Password')
                                 }}</label>
-                            <div class="col-md-6">
-                                <input id="password" required type="password"
-                                    class="form-control @error('password') is-invalid @enderror" name="password"
-                                    value="{{ old('password') }}" autofocus autocomplete="off">
+                            <div class="">
+                                <input id="password" type="password"
+                                    class="form-control mt-1 @error('password') is-invalid @enderror" name="password"
+                                    value="{{ old('password') }}" required autocomplete="title" autofocus>
+                                @error('password')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                             </div>
-                        </div>
-                        <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Enter') }}
-                                </button>
-                            </div>
-                        </div>
+                            <button type="submit" class="cta-btn">
+                                {{ __('GO GO') }}
+                            </button>
                     </form>
                 </div>
             </div>

@@ -50,11 +50,13 @@
         </div>
         <div class="recent-grid">
             <div class="projects">
-                <div class="card">
-                    <div class="card-header">
-                        <h2>My quizes</h2>
+                <div class="card shadow-none">
+                    <div class="card-header bg-white border-0 p-0">
+                        <h2 class="m-0">My quizes</h2>
                         <button class="btn"><a href="{{route('quizzes.index')}}">see all</a></button>
                     </div>
+
+
                     <div class=" card-body">
                         <div class="table-responsive">
                             <table width="100%">
@@ -99,9 +101,9 @@
                 </div>
             </div>
             <div class="customers">
-                <div class="card">
-                    <div class="card-header">
-                        <h2>My Recent Results</h2>
+                <div class="card .shadow-none">
+                    <div class="card-header bg-white">
+                        <h4 class="m-0">My Recent Results</h4>
                         <button class="btn"><a href="{{route('results.index')}}">see all</a></button>
                     </div>
                     <table>
