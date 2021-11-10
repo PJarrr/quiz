@@ -3,13 +3,11 @@
 @section('content')
 <link href="{{ asset('css/login.css') }}" rel="stylesheet">
 
-
-
-
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-4">
             <div class="card">
+
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
@@ -35,8 +33,6 @@
 
                             <label for="password" class="mt-2">{{ __('Password')
                                 }}</label>
-
-
                             <div class="">
                                 <input id="password" type="password"
                                     class="form-control @error('password') is-invalid @enderror" name="password"

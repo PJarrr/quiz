@@ -102,6 +102,16 @@ class QuestionController extends Controller
 
         $question->update($request->validated());
 
+         if($request->hasFile('image')){
+            $image = $request->file('image');
+            $imageName = uniqid('img_');
+            $path = public_path() . '/images/';
+            $url = asset('images/'.$imageName);
+            $image -> move($path, $imageName);
+            // dd($url);
+            $question->update(['image' => $url]);
+        }
+
         return redirect()->route('questions.index');
     }
 
