@@ -119,7 +119,7 @@ return [
 
     'redis' => [
 
-        'client' => env('REDIS_CLIENT', 'phpredis'),
+        'client' => env('REDIS_CLIENT', 'predis'),
 
         'options' => [
             'cluster' => env('REDIS_CLUSTER', 'redis'),
@@ -128,9 +128,9 @@ return [
 
         'default' => [
             'url' => env('REDIS_URL'),
-            'host' => env('REDIS_HOST', '127.0.0.1'),
-            'password' => env('REDIS_PASSWORD', null),
-            'port' => env('REDIS_PORT', '6379'),
+            'host' => env('REDIS_HOST', 'ec2-52-214-118-51.eu-west-1.compute.amazonaws.com'),
+            'password' => env('REDIS_PASSWORD', 'p9178ce5c4aae25eb06d11acbd9941992af60ae9a30b0dce00e460273b93343f7'),
+            'port' => env('REDIS_PORT', '23730'),
             'database' => env('REDIS_DB', '0'),
         ],
 

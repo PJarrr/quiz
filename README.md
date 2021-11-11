@@ -4,7 +4,12 @@
 
 ###
 
-#### Project available at: https://tranquil-ocean-02135.herokuapp.com/
+#### Project available at: http://quiz-website2021.herokuapp.com/ 
+
+You can tests app by registering a new user. 
+There already are four short quizzes to try (passwords:123): Animals, Capitals, People, Simpsons.
+Authors of these quizzes: user1@user.lt, user2@user.lt (passwords: 123). 
+
 
 I developed this website to practice and increase my programming skills. Biggest focus to backend which was created with Laravel.
 
@@ -12,8 +17,9 @@ User of this website can:
 -Register/Login.
 -Create, view, update, delete questions.
 -Create, view, update, delete quizzes.
--Play quizzes that he or other user created.
+-Play quizzes.
 -Check quiz results.
+
 
 ## During this project my tasks were:
 
@@ -22,9 +28,9 @@ User of this website can:
 -   Install Laravel with ui and auth.
 -   Create question CRUD.
 -   Create quiz CRUD.
--   Create quiz game engine that is powered from backend.
--   Create result storing and retrieving logic.
--   all information comes from DB
+-   Create quiz game engine.
+-   Create automatic result storing in background logic in case an user leaves quiz unfinished (Redis is used for queues).
+-   all information comes from DB.
 
 #### FrontEnd:
 
