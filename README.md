@@ -4,11 +4,12 @@
 
 ###
 
-#### Project available at: http://quiz-website2021.herokuapp.com/ 
 
-You can tests app by registering a new user. 
+#### Project available at: http://quiz-website2021.herokuapp.com/
+
+You can tests app by registering a new user.
 There already are four short quizzes to try (passwords:123): Animals, Capitals, People, Simpsons.
-Authors of these quizzes: user1@user.lt, user2@user.lt (passwords: 123). 
+Authors of these quizzes: user1@user.lt, user2@user.lt (passwords: 123).
 
 
 I developed this website to practice and increase my programming skills. Biggest focus to backend which was created with Laravel.
@@ -19,7 +20,6 @@ User of this website can:
 -Create, view, update, delete quizzes.
 -Play quizzes.
 -Check quiz results.
-
 
 ## During this project my tasks were:
 
